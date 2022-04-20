@@ -1,0 +1,58 @@
+<!-- Modal -->
+<div class="modal fade" id="buyCurrencyModal" tabindex="-1" aria-labelledby="buyCurrencyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="buyCurrencyModalLabel">Buy</h5>
+        <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start">
+        <form
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+        >
+          <p>Currency: {{quote?.quote_currency_code}}</p>
+          <p>Exchange rate: {{quote?.quote}}</p>
+          <!-- amount -->
+          <div class="mb-3">
+            <label
+              for="amount"
+              class="form-label"
+            >Amount</label>
+            <input
+              type="number"
+              class="form-control"
+              [ngClass]="{'is-invalid': !form.get('amount')?.valid && form.get('amount')?.dirty}"
+              id="amount"
+              formControlName="amount"
+            >
+            <p class="mt-2">Total: {{total | number:'1.2-6'}} {{quote?.base_currency_code}}</p>
+          </div>
+        </form>
+
+        <!-- Success report -->
+        <div
+          *ngIf="successReport"
+          class="alert mt-2"
+          [ngClass]="successReport.success ? 'alert-success' : 'alert-danger'"
+          role="alert"
+        >
+        <div class="d-flex align-items-center">
+          <i
+            class="bi bi-check-circle-fill me-2"
+            [ngClass]="successReport.success ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'"
+          ></i>
+          <span>
+            {{successReport.message}}
+          </span>
+        </div>
+      </div>
+
+      </div>
+      <div class="modal-footer">
+        <!-- Submit button -->
+        <app-submit-button [form]="form" [isSaving]="isSaving" (click)="onSubmit()"></app-submit-button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<button
+  type="submit"
+  class="btn btn-primary mt-2"
+  [disabled]="!form?.valid || isSaving"
+>
+  <ng-template [ngIf]="!isSaving">
+    {{text}}
+  </ng-template>
+  <ng-template [ngIf]="isSaving">
+    <span
+      class="spinner-border spinner-border-sm"
+      role="status"
+      aria-hidden="true"
+    ></span>
+    {{submittingText}}
+  </ng-template>
+</button>

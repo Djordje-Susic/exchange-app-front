@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Code</th>
+      <th scope="col">Currency</th>
+      <th scope="col" colspan="2">Exchange rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let quote of quotes; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{quote.key}}</td>
+      <td>{{quote.quote_currency_code}}</td>
+      <td>{{quote.quote}} <span *ngIf="quote.discount_percentage" class="badge bg-primary">{{quote.discount_percentage }}% off</span></td>
+      <td><button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#buyCurrencyModal" (click)="onQuoteSelect(i)">Buy</button></td>
+    </tr>
+  </tbody>
+</table>
